@@ -1,0 +1,24 @@
+{
+  "name": "react-high-timer",
+  "version": "1.0.0",
+  "description": "A higher-order React timer component",
+  "main": "./lib/index.js",
+  "typings": "./lib/index",
+  "repository": "https://github.com/ceyhuno/react-high-timer",
+  "author": "Ceyhun Ozugur <ceyhunozugur@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "peerDependencies": {
+    "react": "^15.6.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.0.5",
+    "@types/react-native": "^0.46",
+    "typescript": "^2.4.2"
+  },
+  "dependencies": {
+    "hoist-non-react-statics": "^2.3.0"
+  }
+}
