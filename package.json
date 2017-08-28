@@ -10,12 +10,9 @@
   "scripts": {
     "build": "tsc"
   },
-  "peerDependencies": {
-    "react": "^15.6.1"
-  },
   "devDependencies": {
     "@types/react": "^16.0.5",
-    "@types/react-native": "^0.46",
+    "react": "^15.6.1",
     "typescript": "^2.4.2"
   },
   "dependencies": {

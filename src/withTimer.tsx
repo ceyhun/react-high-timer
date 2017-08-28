@@ -1,7 +1,9 @@
 import * as React from 'react';
-import hoistNonReactStatic from 'hoist-non-react-statics';
+import * as hoistNonReactStatic from 'hoist-non-react-statics';
 
-const GLOBAL: Window = typeof window === 'undefined' ? global as any : window;
+declare const global: Window;
+
+const GLOBAL = typeof window === 'undefined' ? global : window;
 
 export interface TimerProps {
   clearTimeout: (handle: number) => void;
