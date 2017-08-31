@@ -7,6 +7,19 @@
   "repository": "https://github.com/ceyhuno/react-high-timer",
   "author": "Ceyhun Ozugur <ceyhunozugur@gmail.com>",
   "license": "MIT",
+  "keywords": [
+    "react",
+    "reactjs",
+    "react-native",
+    "react-dom",
+    "native",
+    "react-component",
+    "timer",
+    "timeout",
+    "hoc",
+    "higher-order",
+    "component"
+  ],
   "scripts": {
     "build": "tsc"
   },

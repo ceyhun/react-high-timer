@@ -1,2 +1,2 @@
-import { withTimer, TimerProps } from './withTimer';
-export { withTimer, TimerProps };
+import { TimerProps, withTimer } from './withTimer';
+export { TimerProps, withTimer };

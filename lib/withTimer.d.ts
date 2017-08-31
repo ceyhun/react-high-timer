@@ -1,5 +1,15 @@
 /// <reference types="react" />
 import * as React from 'react';
+export declare type ComponentClass<P> = React.ComponentClass<P>;
+export declare type ComponentType<P> = React.ComponentType<P>;
+export declare type Diff<T extends string, U extends string> = ({
+    [P in T]: P;
+} & {
+    [P in U]: never;
+} & {
+    [x: string]: never;
+})[T];
+export declare type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
 export interface TimerProps {
     clearTimeout: (handle: number) => void;
     setTimeout: (handler: (...args: any[]) => void, timeout: number) => number;
@@ -10,34 +20,4 @@ export interface TimerProps {
     cancelAnimationFrame: (handle: number) => void;
     requestAnimationFrame: (callback: FrameRequestCallback) => number;
 }
-export declare function withTimer<WrappedComponentProps extends {}>(WrappedComponent: React.ComponentClass<WrappedComponentProps & TimerProps> | React.StatelessComponent<WrappedComponentProps & TimerProps>): {
-    new (props?: WrappedComponentProps | undefined, context?: any): {
-        _timeouts: number[];
-        _intervals: number[];
-        _immediates: number[];
-        _rafs: number[];
-        componentWillUnmount(): void;
-        _localClearer: (handle: number, array: number[]) => void;
-        _clearTimeout: (handle: number) => void;
-        _setTimeout: (handler: (...args: any[]) => void, timeout: number) => number;
-        _clearInterval: (handle: number) => void;
-        _setInterval: (handler: (...args: any[]) => void, timeout: number) => number;
-        _clearImmediate: (handle: number) => void;
-        _setImmediate: (handler: (...args: any[]) => void) => number;
-        _cancelAnimationFrame: (handle: number) => void;
-        _requestAnimationFrame: (callback: FrameRequestCallback) => number;
-        render(): JSX.Element;
-        setState<K extends never>(f: (prevState: {}, props: WrappedComponentProps) => Pick<{}, K>, callback?: (() => any) | undefined): void;
-        setState<K extends never>(state: Pick<{}, K>, callback?: (() => any) | undefined): void;
-        forceUpdate(callBack?: (() => any) | undefined): void;
-        props: Readonly<{
-            children?: React.ReactNode;
-        }> & Readonly<WrappedComponentProps>;
-        state: Readonly<{}>;
-        context: any;
-        refs: {
-            [key: string]: React.ReactInstance;
-        };
-    };
-    displayName: string;
-};
+export declare function withTimer<WrappedComponentProps extends TimerProps>(WrappedComponent: ComponentType<WrappedComponentProps>): ComponentClass<Omit<WrappedComponentProps, keyof TimerProps>>;

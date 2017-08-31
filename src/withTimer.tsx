@@ -5,6 +5,13 @@ declare const global: Window;
 
 const GLOBAL = typeof window === 'undefined' ? global : window;
 
+export type ComponentClass<P> = React.ComponentClass<P>;
+export type ComponentType<P> = React.ComponentType<P>;
+
+// Diff / Omit taken from https://github.com/Microsoft/TypeScript/issues/12215#issuecomment-311923766
+export type Diff<T extends string, U extends string> = ({ [P in T]: P } & { [P in U]: never } & { [x: string]: never })[T];
+export type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
+
 export interface TimerProps {
   clearTimeout: (handle: number) => void;
   setTimeout: (handler: (...args: any[]) => void, timeout: number) => number;
@@ -16,12 +23,10 @@ export interface TimerProps {
   requestAnimationFrame: (callback: FrameRequestCallback) => number;
 }
 
-export function withTimer<WrappedComponentProps extends {}>(
-  WrappedComponent:
-    | React.ComponentClass<WrappedComponentProps & TimerProps>
-    | React.StatelessComponent<WrappedComponentProps & TimerProps>,
-) {
-  const Wrapper = class TimerComponent extends React.Component<WrappedComponentProps, {}> {
+export function withTimer<WrappedComponentProps extends TimerProps>(
+  WrappedComponent: ComponentType<WrappedComponentProps>,
+): ComponentClass<Omit<WrappedComponentProps, keyof TimerProps>> {
+  const Wrapper = class TimerComponent extends React.Component<Omit<WrappedComponentProps, keyof TimerProps>, {}> {
     static displayName = `TimerComponent(${WrappedComponent.displayName || WrappedComponent.name})`;
 
     _timeouts: number[] = [];
